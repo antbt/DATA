@@ -1,0 +1,262 @@
+#处理缺失数据
+string_data = pd.Series(['aardvark','artichoke',np.nan,])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'pd' is not defined
+import pandas as pd
+import numpy as np
+string_data = pd.Series(['aardvark','artichoke',np.nan,'avpcadp'])
+string_data
+0     aardvark
+1    artichoke
+2          NaN
+3      avpcadp
+dtype: object
+string_data.isnull()
+0    False
+1    False
+2     True
+3    False
+dtype: bool
+string_data[0] = None
+#过滤缺失数据
+from numpy import nan as NA
+data = pd.Series([1,Na],3.5,NA,7)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'Na' is not defined
+data = pd.Series([1,NA],3.5,NA,7)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\series.py", line 169, in __init__
+    index = ensure_index(index)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 5378, in ensure_index
+    return Index(index_like)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 468, in __new__
+    cls._scalar_data_error(data)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 3799, in _scalar_data_error
+    repr(data)))
+TypeError: Index(...) must be called with a collection of some kind, 3.5 was passed
+data = pd.Series([1,NA],3.5,NA,7)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\series.py", line 169, in __init__
+    index = ensure_index(index)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 5378, in ensure_index
+    return Index(index_like)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 468, in __new__
+    cls._scalar_data_error(data)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 3799, in _scalar_data_error
+    repr(data)))
+TypeError: Index(...) must be called with a collection of some kind, 3.5 was passed
+data = pd.Series([1,NA,3.5,NA,7])
+data
+0    1.0
+1    NaN
+2    3.5
+3    NaN
+4    7.0
+dtype: float64
+data.dropna()
+0    1.0
+2    3.5
+4    7.0
+dtype: float64
+#等价于
+data[data.notnull()]
+0    1.0
+2    3.5
+4    7.0
+dtype: float64
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],)
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3])
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2011, in pandas_dtype
+    npdtype = np.dtype(dtype)
+TypeError: data type not understood
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 383, in __init__
+    dtype = self._validate_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 182, in _validate_dtype
+    dtype = pandas_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2015, in pandas_dtype
+    raise TypeError("data type not understood")
+TypeError: data type not understood
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.])
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2011, in pandas_dtype
+    npdtype = np.dtype(dtype)
+TypeError: data type not understood
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 383, in __init__
+    dtype = self._validate_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 182, in _validate_dtype
+    dtype = pandas_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2015, in pandas_dtype
+    raise TypeError("data type not understood")
+TypeError: data type not understood
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.])
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2011, in pandas_dtype
+    npdtype = np.dtype(dtype)
+TypeError: data type not understood
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 383, in __init__
+    dtype = self._validate_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 182, in _validate_dtype
+    dtype = pandas_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2015, in pandas_dtype
+    raise TypeError("data type not understood")
+TypeError: data type not understood
+import pandas as pd
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.])
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2011, in pandas_dtype
+    npdtype = np.dtype(dtype)
+TypeError: data type not understood
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 383, in __init__
+    dtype = self._validate_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 182, in _validate_dtype
+    dtype = pandas_dtype(dtype)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\dtypes\common.py", line 2015, in pandas_dtype
+    raise TypeError("data type not understood")
+TypeError: data type not understood
+data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.]])
+  File "<input>", line 1
+    data = pd.DataFrame([1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.]])
+                                                                     ^
+SyntaxError: invalid syntax
+data = pd.DataFrame([[1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.]])
+data
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0
+cleaned
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'cleaned' is not defined
+cleaned = data.dropna()
+cleaned
+     0    1    2
+0  1.0  6.5  3.0
+data
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0
+data[4] = NA
+data
+     0    1    2   4
+0  1.0  6.5  3.0 NaN
+1  1.0  NaN  NaN NaN
+2  NaN  NaN  NaN NaN
+3  NaN  6.5  3.0 NaN
+data[:,4] = na
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'na' is not defined
+data[:,4] = NA
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 3370, in __setitem__
+    self._set_item(key, value)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 3445, in _set_item
+    value = self._sanitize_column(key, value)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 3661, in _sanitize_column
+    if broadcast and key in self.columns and value.ndim == 1:
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\numeric.py", line 176, in __contains__
+    hash(key)
+TypeError: unhashable type: 'slice'
+data.dropna(axis = 1,how='all')
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0
+data
+     0    1    2   4
+0  1.0  6.5  3.0 NaN
+1  1.0  NaN  NaN NaN
+2  NaN  NaN  NaN NaN
+3  NaN  6.5  3.0 NaN
+df = pd.DataFrame(np.random.randn(7,3))
+df
+          0         1         2
+0  0.800555  0.524744  0.175188
+1 -1.479989 -0.062902  0.428002
+2 -0.014324  1.217442 -1.315863
+3  0.660648  0.114060  0.207032
+4  0.701661  1.446040 -0.308940
+5 -0.268470  2.650228 -0.333350
+6  1.846470 -1.060149 -0.435460
+df.dropna()
+          0         1         2
+0  0.800555  0.524744  0.175188
+1 -1.479989 -0.062902  0.428002
+2 -0.014324  1.217442 -1.315863
+3  0.660648  0.114060  0.207032
+4  0.701661  1.446040 -0.308940
+5 -0.268470  2.650228 -0.333350
+6  1.846470 -1.060149 -0.435460
+df.iloc[:4.1] = NA
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexing.py", line 189, in __setitem__
+    indexer = self._get_setitem_indexer(key)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexing.py", line 175, in _get_setitem_indexer
+    return self._convert_to_indexer(key, is_setter=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexing.py", line 2241, in _convert_to_indexer
+    return self._convert_slice_indexer(obj, axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexing.py", line 267, in _convert_slice_indexer
+    return ax._convert_slice_indexer(key, kind=self.name)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 2908, in _convert_slice_indexer
+    self._validate_indexer('slice', key.stop, kind),
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 4710, in _validate_indexer
+    self._invalid_indexer(form, key)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\base.py", line 3067, in _invalid_indexer
+    kind=type(key)))
+TypeError: cannot do slice indexing on <class 'pandas.core.indexes.range.RangeIndex'> with these indexers [4.1] of <class 'float'>
+df.iloc[:4,1] = NA
+df.iloc[:2,2] = NA
+df
+          0         1         2
+0  0.800555       NaN       NaN
+1 -1.479989       NaN       NaN
+2 -0.014324       NaN -1.315863
+3  0.660648       NaN  0.207032
+4  0.701661  1.446040 -0.308940
+5 -0.268470  2.650228 -0.333350
+6  1.846470 -1.060149 -0.435460
+df.dropna()
+          0         1        2
+4  0.701661  1.446040 -0.30894
+5 -0.268470  2.650228 -0.33335
+6  1.846470 -1.060149 -0.43546
+df
+          0         1         2
+0  0.800555       NaN       NaN
+1 -1.479989       NaN       NaN
+2 -0.014324       NaN -1.315863
+3  0.660648       NaN  0.207032
+4  0.701661  1.446040 -0.308940
+5 -0.268470  2.650228 -0.333350
+6  1.846470 -1.060149 -0.435460
+df.dropna(thresh = 2)
+          0         1         2
+2 -0.014324       NaN -1.315863
+3  0.660648       NaN  0.207032
+4  0.701661  1.446040 -0.308940
+5 -0.268470  2.650228 -0.333350
+6  1.846470 -1.060149 -0.435460
