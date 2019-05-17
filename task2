@@ -75,3 +75,91 @@ arr_slice[1] = 12345
 arr
 array([    0,     1,     2,     3,     4,    12, 12345,    12,     8,
            9])
+#切片[：]会给数组中所有值赋值
+import numpy as np
+arr = np.arange(10)
+arr_slice = arr[5:8]
+arr_slice
+array([5, 6, 7])
+arr_slice[:] = 64
+ar
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'ar' is not defined
+arr
+array([ 0,  1,  2,  3,  4, 64, 64, 64,  8,  9])
+# 如果你想要得到的是ndarray切片的一份副本而非视图，就需要明确地进行复制操作，例如arr[5:8].copy()
+# 如果你想要得到的是ndarray切片的一份副本而非视图，就需要明确地进行复制操作，例如arr[5:8].copy()
+#二维数组
+arr2d = np.array([[1,2,3],4,5,6],[7,8,9])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: data type not understood
+arr2d = np.array([[1,2,3],[4,5,6],[7,8,9]])
+arr2
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'arr2' is not defined
+arr2d
+arr3d = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+arr3d
+array([[[ 1,  2,  3],
+        [ 4,  5,  6]],
+       [[ 7,  8,  9],
+        [10, 11, 12]]])
+        arr3d[0]
+array([[1, 2, 3],
+       [4, 5, 6]])
+arr3d[1,0]
+array([7, 8, 9])
+x = arr3d[1]
+x
+array([[ 7,  8,  9],
+       [10, 11, 12]])
+x[0]
+array([7, 8, 9])
+arr3d[1,0]
+array([7, 8, 9])
+arr3d[1,1,1]
+11
+old_value = arr3d[0].copy()
+old_value
+array([[1, 2, 3],
+       [4, 5, 6]])
+arr3d
+array([[[ 1,  2,  3],
+        [ 4,  5,  6]],
+       [[ 7,  8,  9],
+        [10, 11, 12]]])
+arr3d[0] = old_value
+arr3d
+array([[[ 1,  2,  3],
+        [ 4,  5,  6]],
+       [[ 7,  8,  9],
+        [10, 11, 12]]])
+arr3d[0]
+array([[1, 2, 3],
+       [4, 5, 6]])
+arr3d[1,0]
+array([7, 8, 9])
+x = arr3d[1]
+x
+array([[ 7,  8,  9],
+       [10, 11, 12]])
+x[0]
+array([7, 8, 9])
+arr3d[1,0]
+array([7, 8, 9])
+arr3d[1,1,1]
+11
+arr
+array([ 0,  1,  2,  3,  4, 64, 64, 64,  8,  9])
+arr[1:6]
+array([ 1,  2,  3,  4, 64])
+arr2d[:2]
+array([[1, 2, 3],
+       [4, 5, 6]])
+arr2d
+array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
