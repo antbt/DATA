@@ -1,5 +1,5 @@
 #处理缺失数据
-string_data = pd.Series(['aardvark','artichoke',np.nan,])
+string_data = pd.Series(['aardvark','artichoke',np.nan])
 Traceback (most recent call last):
   File "<input>", line 1, in <module>
 NameError: name 'pd' is not defined
@@ -260,3 +260,340 @@ df.dropna(thresh = 2)
 4  0.701661  1.446040 -0.308940
 5 -0.268470  2.650228 -0.333350
 6  1.846470 -1.060149 -0.435460
+df.fillna(0)
+          0         1         2
+0  0.190925  0.000000  0.000000
+1 -1.483239  0.000000  0.000000
+2 -0.734257  0.000000 -1.316728
+3  0.733022  0.000000  0.288274
+4 -0.998421  0.473044 -1.308965
+5 -1.247776 -0.883013 -0.396834
+6 -1.928312 -0.146379  0.417426
+df.fillna({1:0.5,2:0})
+          0         1         2
+0  0.190925  0.500000  0.000000
+1 -1.483239  0.500000  0.000000
+2 -0.734257  0.500000 -1.316728
+3  0.733022  0.500000  0.288274
+4 -0.998421  0.473044 -1.308965
+5 -1.247776 -0.883013 -0.396834
+6 -1.928312 -0.146379  0.417426
+_ = df.fillna(0,inplace = True)
+_
+_
+_
+df
+          0         1         2
+0  0.190925  0.000000  0.000000
+1 -1.483239  0.000000  0.000000
+2 -0.734257  0.000000 -1.316728
+3  0.733022  0.000000  0.288274
+4 -0.998421  0.473044 -1.308965
+5 -1.247776 -0.883013 -0.396834
+6 -1.928312 -0.146379  0.417426
+_
+df
+          0         1         2
+0  0.190925  0.000000  0.000000
+1 -1.483239  0.000000  0.000000
+2 -0.734257  0.000000 -1.316728
+3  0.733022  0.000000  0.288274
+4 -0.998421  0.473044 -1.308965
+5 -1.247776 -0.883013 -0.396834
+6 -1.928312 -0.146379  0.417426
+df.iloc[4:,2] = NA
+df
+          0         1         2
+0  0.196809 -0.964836  1.642764
+1 -0.331314  0.386139 -0.151829
+2  1.686662       NaN  1.083637
+3 -1.096672       NaN -1.022012
+4  0.771515       NaN       NaN
+5  0.092411       NaN       NaN
+df.fillna(method = 'ffill')
+          0         1         2
+0  0.196809 -0.964836  1.642764
+1 -0.331314  0.386139 -0.151829
+2  1.686662  0.386139  1.083637
+3 -1.096672  0.386139 -1.022012
+4  0.771515  0.386139 -1.022012
+5  0.092411  0.386139 -1.022012
+df
+          0         1         2
+0  0.196809 -0.964836  1.642764
+1 -0.331314  0.386139 -0.151829
+2  1.686662       NaN  1.083637
+3 -1.096672       NaN -1.022012
+4  0.771515       NaN       NaN
+5  0.092411       NaN       NaN
+df.fillna(method = 'ffill',limit=2)
+          0         1         2
+0  0.196809 -0.964836  1.642764
+1 -0.331314  0.386139 -0.151829
+2  1.686662  0.386139  1.083637
+3 -1.096672  0.386139 -1.022012
+4  0.771515       NaN -1.022012
+5  0.092411       NaN -1.022012
+data = pd.Series([1.,NA,3.5,NA,7])
+data.fillna(data.mean())
+0    1.000000
+1    3.833333
+2    3.500000
+3    3.833333
+4    7.000000
+dtype: float64
+data
+0    1.0
+1    NaN
+2    3.5
+3    NaN
+4    7.0
+dtype: float64
+data.fillna(data.mean())
+0    1.000000
+1    3.833333
+2    3.500000
+3    3.833333
+4    7.000000
+dtype: float64
+__ = data.fillna(data.mean())
+__
+0    1.000000
+1    3.833333
+2    3.500000
+3    3.833333
+4    7.000000
+dtype: float64
+data = pd.DataFrame({'k1':['one','two']*3 + ['two'],
+                     'k2':[1,1,2,3,3,4,4]})
+data
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4
+6  two   4
+data.duplicated()
+0    False
+1    False
+2    False
+3    False
+4    False
+5    False
+6     True
+dtype: bool
+data.drop_duplicates()
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4
+data = pd.DataFrame({'food': ['bacon', 'pulled pork', 'bacon',
+   ....:                               'Pastrami', 'corned beef', 'Bacon',
+   ....:                               'pastrami', 'honey ham', 'nova lox'],
+   ....:                      'ounces': [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
+  File "<input>", line 2
+    ....:                               'Pastrami', 'corned beef', 'Bacon',
+        ^
+SyntaxError: invalid syntax
+data = pd.DataFrame({'food': ['bacon', 'pulled pork', 'bacon',
+                                  'Pastrami', 'corned beef', 'Bacon',
+                                  'pastrami', 'honey ham', 'nova lox'],
+                         'ounces': [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
+data
+          food  ounces
+0        bacon     4.0
+1  pulled pork     3.0
+2        bacon    12.0
+3     Pastrami     6.0
+4  corned beef     7.5
+5        Bacon     8.0
+6     pastrami     3.0
+7    honey ham     5.0
+8     nova lox     6.0
+meat_to_animal = {
+  'bacon': 'pig',
+  'pulled pork': 'pig',
+  'pastrami': 'cow',
+  'corned beef': 'cow',
+  'honey ham': 'pig',
+  'nova lox': 'salmon'
+}
+lowercased = data['food'].strlower()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 5067, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'Series' object has no attribute 'strlower'
+lowercased = data['food'].str.lower()
+lowercased
+0          bacon
+1    pulled pork
+2          bacon
+3       pastrami
+4    corned beef
+5          bacon
+6       pastrami
+7      honey ham
+8       nova lox
+Name: food, dtype: object
+data['animal'] = lowercased.map(,eat_to_animal)
+  File "<input>", line 1
+    data['animal'] = lowercased.map(,eat_to_animal)
+                                    ^
+SyntaxError: invalid syntax
+data['animal'] = lowercased.map(eat_to_animal)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'eat_to_animal' is not defined
+data['animal'] = lowercased.map(eat_to_animal)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'eat_to_animal' is not defined
+meat_to_animal = {
+  'bacon': 'pig',
+  'pulled pork': 'pig',
+  'pastrami': 'cow',
+  'corned beef': 'cow',
+  'honey ham': 'pig',
+  'nova lox': 'salmon'
+}
+data['animal'] = lowercased.map(meat_to_animal)
+data
+          food  ounces  animal
+0        bacon     4.0     pig
+1  pulled pork     3.0     pig
+2        bacon    12.0     pig
+3     Pastrami     6.0     cow
+4  corned beef     7.5     cow
+5        Bacon     8.0     pig
+6     pastrami     3.0     cow
+7    honey ham     5.0     pig
+8     nova lox     6.0  salmon
+data['food'].map(lambda x:meat_to_animal[x.lower()])
+0       pig
+1       pig
+2       pig
+3       cow
+4       cow
+5       pig
+6       cow
+7       pig
+8    salmon
+Name: food, dtype: object
+data = pd.Series([1.,-999.,2.,-999.,-1000.,3.])
+data
+0       1.0
+1    -999.0
+2       2.0
+3    -999.0
+4   -1000.0
+5       3.0
+dtype: float64
+data.replace(-999,np.nan)
+0       1.0
+1       NaN
+2       2.0
+3       NaN
+4   -1000.0
+5       3.0
+dtype: float64
+data.replace([-999,-1000],np.nan)
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    NaN
+5    3.0
+dtype: float64
+data
+0       1.0
+1    -999.0
+2       2.0
+3    -999.0
+4   -1000.0
+5       3.0
+dtype: float64
+
+import numpy as np
+import pandas as pd
+data = pd.DataFrame(np.arange(12).reshape((3,4)),
+                    inde = ['Ohio','Colorado','New York'],
+                    columns = ['one','two','three','four'])
+Traceback (most recent call last):
+  File "<input>", line 3, in <module>
+TypeError: __init__() got an unexpected keyword argument 'inde'
+from numpy import nan as NA
+data = pd.DataFrame(np.arange(12).reshape((3,4)),
+                    index = ['Ohio','Colorado','New York'],
+                    columns = ['one','two','three','four'])
+data
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+New York    8    9     10    11
+transform = lambda x:x[:4].upper()
+transform
+<function <lambda> at 0x000000000A8D4A60>
+data.index.map(transform)
+Index(['OHIO', 'COLO', 'NEW '], dtype='object')
+data
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+New York    8    9     10    11
+data.index
+Index(['Ohio', 'Colorado', 'New York'], dtype='object')
+data
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+New York    8    9     10    11
+data.index
+Index(['Ohio', 'Colorado', 'New York'], dtype='object')
+data.index = data.index.map(transform)
+data
+      one  two  three  four
+OHIO    0    1      2     3
+COLO    4    5      6     7
+NEW     8    9     10    11
+tansform
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'tansform' is not defined
+transform
+<function <lambda> at 0x000000000A8D4A60>
+transform.index
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+AttributeError: 'function' object has no attribute 'index'
+data.rename(index = str.title,olumns = str.upper)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\util\_decorators.py", line 197, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 4025, in rename
+    return super(DataFrame, self).rename(**kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 1072, in rename
+    'argument "{0}"'.format(list(kwargs.keys())[0]))
+TypeError: rename() got an unexpected keyword argument "olumns"
+data.rename(index = str.title,columns = str.upper)
+      ONE  TWO  THREE  FOUR
+Ohio    0    1      2     3
+Colo    4    5      6     7
+New     8    9     10    11
+data.rename(index={'OHIO':'INDIANA',inplace = True})
+  File "<input>", line 1
+    data.rename(index={'OHIO':'INDIANA',inplace = True})
+                                                ^
+SyntaxError: invalid syntax
+data.rename(index={'OHIO':'INDIANA'},inplace = True)
+data
+         one  two  three  four
+INDIANA    0    1      2     3
+COLO       4    5      6     7
+NEW        8    9     10    11
