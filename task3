@@ -597,3 +597,40 @@ data
 INDIANA    0    1      2     3
 COLO       4    5      6     7
 NEW        8    9     10    11
+
+data.rename(index={'OHIO':'INDIANA'},inplace = True)
+data
+         one  two  three  four
+INDIANA    0    1      2     3
+COLO       4    5      6     7
+NEW        8    9     10    11
+##离散化和面元划分
+ages = [20,22,25,27,21,23,37,31,61,45,41,32]
+ages
+[20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]
+bins = [18,25,35,60,100]
+cats = pd.cut(ages,bins)
+csts
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'csts' is not defined
+cats
+[(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35, 60], (35, 60], (25, 35]]
+Length: 12
+Categories (4, interval[int64]): [(18, 25] < (25, 35] < (35, 60] < (60, 100]]
+cats.codes
+array([0, 0, 0, 1, 0, 0, 2, 1, 3, 2, 2, 1], dtype=int8)
+cats.categories
+IntervalIndex([(18, 25], (25, 35], (35, 60], (60, 100]],
+              closed='right',
+              dtype='interval[int64]')
+pd.value_counts(cats)
+(18, 25]     5
+(35, 60]     3
+(25, 35]     3
+(60, 100]    1
+dtype: int64
+pd.cut(ages,[18,26,36,61,100],right=False)
+[[18, 26), [18, 26), [18, 26), [26, 36), [18, 26), ..., [26, 36), [61, 100), [36, 61), [36, 61), [26, 36)]
+Length: 12
+Categories (4, interval[int64]): [[18, 26) < [26, 36) < [36, 61) < [61, 100)]
