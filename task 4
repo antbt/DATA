@@ -185,3 +185,483 @@ object
 2    b  one
 3    b  two
 4    a  one
+df.groupby('key1')['data1']
+<pandas.core.groupby.generic.SeriesGroupBy object at 0x0000000002B0DDD8>
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+df.groupby('key2')['data2']
+<pandas.core.groupby.generic.SeriesGroupBy object at 0x000000000BC197B8>
+df.groupby(['key1','key2'])[['data2']].mean()
+              data2
+key1 key2          
+a    one   0.576450
+     two   0.389802
+b    one   0.677797
+     two  -1.044910
+s_grouped
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 's_grouped' is not defined
+s_grouped = df.groupby(['key1','key2'])['data2']
+s_grouped
+<pandas.core.groupby.generic.SeriesGroupBy object at 0x000000000A8BC080>
+from numpy import nan as NA
+people.iloc[2;3,[1,2]] = np.nan
+  File "<input>", line 1
+    people.iloc[2;3,[1,2]] = np.nan
+                 ^
+SyntaxError: invalid syntax
+people.iloc[2;3],[1,2]] = np.nan
+  File "<input>", line 1
+    people.iloc[2;3],[1,2]] = np.nan
+                 ^
+SyntaxError: invalid syntax
+people.iloc[2;3,[1,2]] = np.nan
+  File "<input>", line 1
+    people.iloc[2;3,[1,2]] = np.nan
+                 ^
+SyntaxError: invalid syntax
+people.iloc[2:3,[1,2]] = np.nan
+people
+               a         b         c         d         e
+Joe     0.411884 -1.966270 -0.181562 -0.998244 -0.420180
+Steve  -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+Wes     0.394897       NaN       NaN -0.071225 -1.440562
+Jim    -1.259157  2.243839 -0.278359  1.254999  0.453878
+Travis  0.618026 -0.795046  1.485211  0.569592 -1.006545
+mapping ={'a':'red','b':'red','c':'blue',
+          'd':'blue','e':'red','f':'orange'}
+by_column = people.groupby(mapping,axis = 1)
+by_column.sum()
+            blue       red
+Joe    -1.179806 -1.974566
+Steve  -5.850973 -2.710586
+Wes    -0.071225 -1.045665
+Jim     0.976640  1.438560
+Travis  2.054804 -1.183564
+map_series = pd.Series(mapping)
+map_series
+a       red
+b       red
+c      blue
+d      blue
+e       red
+f    orange
+dtype: object
+people.group(map_series,axis=1).count()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 5067, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'group'
+people.groupby(map_series,axis=1).count()
+        blue  red
+Joe        2    3
+Steve      2    3
+Wes        1    2
+Jim        2    3
+Travis     2    3
+people.groupby(len).sum()
+          a         b         c         d         e
+3 -0.452376  0.277569 -0.459920  0.185530 -1.406864
+5 -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+6  0.618026 -0.795046  1.485211  0.569592 -1.006545
+key_list = ['one','one','one','two','two']
+people.groupby([len,key_list]).min()
+              a         b         c         d         e
+3 one  0.394897 -1.966270 -0.181562 -0.998244 -1.440562
+  two -1.259157  2.243839 -0.278359  1.254999  0.453878
+5 one -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+6 two  0.618026 -0.795046  1.485211  0.569592 -1.006545
+columns = pd.MultiIndex.from_arrays([['US','US','JP','JP'],
+                                     [1,3,5,1,3]],
+                                    names=['cty','tenor'])
+Traceback (most recent call last):
+  File "<input>", line 3, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\multi.py", line 336, in from_arrays
+    raise ValueError('all arrays must be same length')
+ValueError: all arrays must be same length
+columns = pd.MultiIndex.from_arrays([['US','US','US','JP','JP'],
+                                     [1,3,5,1,3]],
+                                    names=['cty','tenor'])
+hier_df = pd.DataFrame(np.random.rand(4,5),columns=columns)
+hier_df
+cty          US                            JP          
+tenor         1         3         5         1         3
+0      0.924052  0.367693  0.937920  0.580128  0.565144
+1      0.318665  0.714168  0.856684  0.349825  0.834292
+2      0.581277  0.530752  0.821402  0.854790  0.103361
+3      0.370236  0.518174  0.412268  0.883549  0.564840
+hier_df.groupby(level='cty',axis=1).count()
+cty  JP  US
+0     2   3
+1     2   3
+2     2   3
+3     2   3
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+grouped = df.groupby('key1')
+grouped = df.groupby('key1')
+people.iloc[2:3,[1,2]] = np.nan
+>>> people
+               a         b         c         d         e
+Joe     0.411884 -1.966270 -0.181562 -0.998244 -0.420180
+Steve  -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+Wes     0.394897       NaN       NaN -0.071225 -1.440562
+Jim    -1.259157  2.243839 -0.278359  1.254999  0.453878
+Travis  0.618026 -0.795046  1.485211  0.569592 -1.006545
+>>> mapping ={'a':'red','b':'red','c':'blue',
+...           'd':'blue','e':'red','f':'orange'}
+>>> by_column = people.groupby(mapping,axis = 1)
+>>> by_column.sum()
+            blue       red
+Joe    -1.179806 -1.974566
+Steve  -5.850973 -2.710586
+Wes    -0.071225 -1.045665
+Jim     0.976640  1.438560
+Travis  2.054804 -1.183564
+>>> map_series = pd.Series(mapping)
+>>> map_series
+a       red
+b       red
+c      blue
+d      blue
+e       red
+f    orange
+dtype: object
+>>> people.group(map_series,axis=1).count()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 5067, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'group'
+>>> people.groupby(map_series,axis=1).count()
+        blue  red
+Joe        2    3
+Steve      2    3
+Wes        1    2
+Jim        2    3
+Travis     2    3
+>>> people.groupby(len).sum()
+          a         b         c         d         e
+3 -0.452376  0.277569 -0.459920  0.185530 -1.406864
+5 -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+6  0.618026 -0.795046  1.485211  0.569592 -1.006545
+>>> key_list = ['one','one','one','two','two']
+>>> people.groupby([len,key_list]).min()
+              a         b         c         d         e
+3 one  0.394897 -1.966270 -0.181562 -0.998244 -1.440562
+  two -1.259157  2.243839 -0.278359  1.254999  0.453878
+5 one -0.772896 -0.785275 -3.737698 -2.113275 -1.152415
+6 two  0.618026 -0.795046  1.485211  0.569592 -1.006545
+>>> columns = pd.MultiIndex.from_arrays([['US','US','JP','JP'],
+...                                      [1,3,5,1,3]],
+...                                     names=['cty','tenor'])
+Traceback (most recent call last):
+  File "<input>", line 3, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\indexes\multi.py", line 336, in from_arrays
+    raise ValueError('all arrays must be same length')
+ValueError: all arrays must be same length
+>>> columns = pd.MultiIndex.from_arrays([['US','US','US','JP','JP'],
+...                                      [1,3,5,1,3]],
+...                                     names=['cty','tenor'])
+>>> hier_df = pd.DataFrame(np.random.rand(4,5),columns=columns)
+>>> hier_df
+cty          US                            JP          
+tenor         1         3         5         1         3
+0      0.924052  0.367693  0.937920  0.580128  0.565144
+1      0.318665  0.714168  0.856684  0.349825  0.834292
+2      0.581277  0.530752  0.821402  0.854790  0.103361
+3      0.370236  0.518174  0.412268  0.883549  0.564840
+>>> hier_df.groupby(level='cty',axis=1).count()
+cty  JP  US
+0     2   3
+1     2   3
+2     2   3
+3     2   3
+>>> df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+>>> grouped = df.groupby('key1')
+>>> grouped = df.groupby('key1')
+>>> grouped['data1'].quatile(0,9)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 536, in __getattr__
+    (type(self).__name__, attr))
+AttributeError: 'SeriesGroupBy' object has no attribute 'quatile'
+>>> grouped['data1'].quantile(0,9)
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 689, in apply
+    result = self._python_apply_general(f)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 707, in _python_apply_general
+    self.axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\ops.py", line 190, in apply
+    res = f(group)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 591, in curried_with_axis
+    return f(x, *args, **kwargs_with_axis)
+TypeError: quantile() got an unexpected keyword argument 'axis'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 606, in wrapper
+    return self.apply(curried_with_axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\generic.py", line 749, in apply
+    return super(SeriesGroupBy, self).apply(func, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 701, in apply
+    return self._python_apply_general(f)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 707, in _python_apply_general
+    self.axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\ops.py", line 190, in apply
+    res = f(group)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 591, in curried_with_axis
+    return f(x, *args, **kwargs_with_axis)
+TypeError: quantile() got an unexpected keyword argument 'axis'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 689, in apply
+    result = self._python_apply_general(f)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 707, in _python_apply_general
+    self.axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\ops.py", line 190, in apply
+    res = f(group)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 594, in curried
+    return f(x, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\series.py", line 2055, in quantile
+    numeric_only=False)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 7778, in quantile
+    transposed=is_transposed)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\internals\managers.py", line 447, in quantile
+    block = b.quantile(axis=axis, qs=qs, interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\internals\blocks.py", line 1487, in quantile
+    interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\nanops.py", line 1272, in nanpercentile
+    return np.percentile(values, q, axis=axis, interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3707, in percentile
+    a, q, axis, out, overwrite_input, interpolation, keepdims)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3826, in _quantile_unchecked
+    interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3405, in _ureduce
+    r = func(a, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3887, in _quantile_ureduce_func
+    "interpolation can only be 'linear', 'lower' 'higher', "
+ValueError: interpolation can only be 'linear', 'lower' 'higher', 'midpoint', or 'nearest'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 609, in wrapper
+    return self.apply(curried)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\generic.py", line 749, in apply
+    return super(SeriesGroupBy, self).apply(func, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 701, in apply
+    return self._python_apply_general(f)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 707, in _python_apply_general
+    self.axis)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\ops.py", line 190, in apply
+    res = f(group)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 594, in curried
+    return f(x, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\series.py", line 2055, in quantile
+    numeric_only=False)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\frame.py", line 7778, in quantile
+    transposed=is_transposed)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\internals\managers.py", line 447, in quantile
+    block = b.quantile(axis=axis, qs=qs, interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\internals\blocks.py", line 1487, in quantile
+    interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\nanops.py", line 1272, in nanpercentile
+    return np.percentile(values, q, axis=axis, interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3707, in percentile
+    a, q, axis, out, overwrite_input, interpolation, keepdims)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3826, in _quantile_unchecked
+    interpolation=interpolation)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3405, in _ureduce
+    r = func(a, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\numpy\lib\function_base.py", line 3887, in _quantile_ureduce_func
+    "interpolation can only be 'linear', 'lower' 'higher', "
+ValueError: interpolation can only be 'linear', 'lower' 'higher', 'midpoint', or 'nearest'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 619, in wrapper
+    return self._aggregate_item_by_item(name,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 536, in __getattr__
+    (type(self).__name__, attr))
+AttributeError: 'SeriesGroupBy' object has no attribute '_aggregate_item_by_item'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 622, in wrapper
+    raise ValueError
+ValueError
+>>> grouped['data1'].quantile(0.9)
+key1
+a   -0.190882
+b    0.423785
+Name: data1, dtype: float64
+>>> df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+>>> grouped
+<pandas.core.groupby.generic.DataFrameGroupBy object at 0x000000000CECA0B8>
+>>> grouped['data1'].quantile(0.9)
+key1
+a   -0.190882
+b    0.423785
+Name: data1, dtype: float64
+>>> def peak_to_peak(arr):
+...     return arr.max() - arr.min()
+... 
+>>> grouped.agg(peak_to_peak)
+         data1     data2
+key1                    
+a     1.366456  0.696201
+b     1.372586  1.722707
+>>> grouped.describe()
+     data1                      ...     data2                    
+     count      mean       std  ...       50%       75%       max
+key1                            ...                              
+a      3.0 -0.684988  0.720024  ...  0.389802  0.657176  0.924550
+b      2.0 -0.125249  0.970565  ... -0.183557  0.247120  0.677797
+[2 rows x 16 columns]
+>>> tips = pd.read_csv('examples/tips.csv')
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 702, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 429, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 895, in __init__
+    self._make_engine(self.engine)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1122, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1853, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas\_libs\parsers.pyx", line 387, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas\_libs\parsers.pyx", line 705, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] File b'examples/tips.csv' does not exist: b'examples/tips.csv'
+>>> tips = pd.read_csv('examples/tips.csv')
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 702, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 429, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 895, in __init__
+    self._make_engine(self.engine)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1122, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1853, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas\_libs\parsers.pyx", line 387, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas\_libs\parsers.pyx", line 705, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] File b'examples/tips.csv' does not exist: b'examples/tips.csv'
+>>> tips = pd.read_csv(r'examples/tips.csv')
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 702, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 429, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 895, in __init__
+    self._make_engine(self.engine)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1122, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\io\parsers.py", line 1853, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas\_libs\parsers.pyx", line 387, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas\_libs\parsers.pyx", line 705, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] File b'examples/tips.csv' does not exist: b'examples/tips.csv'
+>>> tips = pd.read_csv('examples/tips.csv')
+tips['tip_pct'] = tips['tip'] / tips['total_bill']
+tips[:6]
+   total_bill   tip smoker  day    time  size   tip_pct
+0       16.99  1.01     No  Sun  Dinner     2  0.059447
+1       10.34  1.66     No  Sun  Dinner     3  0.160542
+2       21.01  3.50     No  Sun  Dinner     3  0.166587
+3       23.68  3.31     No  Sun  Dinner     2  0.139780
+4       24.59  3.61     No  Sun  Dinner     4  0.146808
+5       25.29  4.71     No  Sun  Dinner     4  0.186240
+grouped = tips.groupby(['day','smoker'])
+smoker
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'smoker' is not defined
+grouped_pct = grouped['tip_pct']
+grouped_pct.agg('mean')
+day   smoker
+Fri   No        0.151650
+      Yes       0.174783
+Sat   No        0.158048
+      Yes       0.147906
+Sun   No        0.160113
+      Yes       0.187250
+Thur  No        0.160298
+      Yes       0.163863
+Name: tip_pct, dtype: float64
+gouped_pct.agg(['mean','std',peak_to_peak])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'gouped_pct' is not defined
+grouped_pct.agg(['mean','std',peak_to_peak])
+                 mean       std  peak_to_peak
+day  smoker                                  
+Fri  No      0.151650  0.028123      0.067349
+     Yes     0.174783  0.051293      0.159925
+Sat  No      0.158048  0.039767      0.235193
+     Yes     0.147906  0.061375      0.290095
+Sun  No      0.160113  0.042347      0.193226
+     Yes     0.187250  0.154134      0.644685
+Thur No      0.160298  0.038774      0.193350
+     Yes     0.163863  0.039389      0.151240
+grouped_pct.agg(['mean','sstd',peak_to_peak])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\generic.py", line 766, in aggregate
+    (_level or 0) + 1)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\generic.py", line 840, in _aggregate_multiple_funcs
+    results[name] = obj.aggregate(func)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\generic.py", line 760, in aggregate
+    return getattr(self, func_or_funcs)(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 536, in __getattr__
+    (type(self).__name__, attr))
+AttributeError: 'SeriesGroupBy' object has no attribute 'sstd'
+grouped_pct.agg(['mean','std',peak_to_peak])
+                 mean       std  peak_to_peak
+day  smoker                                  
+Fri  No      0.151650  0.028123      0.067349
+     Yes     0.174783  0.051293      0.159925
+Sat  No      0.158048  0.039767      0.235193
+     Yes     0.147906  0.061375      0.290095
+Sun  No      0.160113  0.042347      0.193226
+     Yes     0.187250  0.154134      0.644685
+Thur No      0.160298  0.038774      0.193350
+     Yes     0.163863  0.039389      0.151240
+grouped_pct.agg([('foo','mean'),('bar',np.std)])
+                  foo       bar
+day  smoker                    
+Fri  No      0.151650  0.028123
+     Yes     0.174783  0.051293
+Sat  No      0.158048  0.039767
+     Yes     0.147906  0.061375
+Sun  No      0.160113  0.042347
+     Yes     0.187250  0.154134
+Thur No      0.160298  0.038774
+     Yes     0.163863  0.039389
+
+
