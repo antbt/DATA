@@ -1,0 +1,187 @@
+data = [1,2,3]
+data
+[1, 2, 3]
+data
+[1, 2, 3]
+data
+[1, 2, 3]
+import numpy as np
+import pandas as pd
+df = pd.DataFrame({'key1':['a','a','b','b','a'],})
+df = pd.DataFrame({'key1':['a','a','b','b','a'],
+                   'key2':['one','two','one','two','one'],
+                   'data1':np.random.randn(5),
+                   'data2':np.random.randn(5)})
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+grouped = df['data1'].groupby(fg['key1'])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'fg' is not defined
+grouped = df['data1'].groupby(df['key1'])
+grouped
+<pandas.core.groupby.generic.SeriesGroupBy object at 0x000000000AAD9550>
+grouped.mean()
+key1
+a   -0.684988
+b   -0.125249
+Name: data1, dtype: float64
+means = df['data1'].groupby([df['key1'],df['key2']]).mean()
+means
+key1  key2
+a     one    -0.816180
+      two    -0.422603
+b     one     0.561044
+      two    -0.811542
+Name: data1, dtype: float64
+means
+key1  key2
+a     one    -0.816180
+      two    -0.422603
+b     one     0.561044
+      two    -0.811542
+Name: data1, dtype: float64
+means.unstack()
+key2       one       two
+key1                    
+a    -0.816180 -0.422603
+b     0.561044 -0.811542
+means.unstack()
+key2       one       two
+key1                    
+a    -0.816180 -0.422603
+b     0.561044 -0.811542
+states = np.array(['Ohio','California','California','Ohio','Ohio'])
+states
+array(['Ohio', 'California', 'California', 'Ohio', 'Ohio'], dtype='<U10')
+years
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'years' is not defined
+years = np.array([2005,2005,2006,2005,2006])
+years
+array([2005, 2005, 2006, 2005, 2006])
+df['data1'].groupby([states,years]).mean()
+California  2005   -0.422603
+            2006    0.561044
+Ohio        2005   -1.155475
+            2006   -0.132952
+Name: data1, dtype: float64
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+a
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'a' is not defined
+df.groupby(['key1','key2']).size()
+key1  key2
+a     one     2
+      two     1
+b     one     1
+      two     1
+dtype: int64
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+for name,group in df.groupby('key1'):
+    print(name)
+    print(group)
+    
+a
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+4    a  one -0.132952  0.228349
+b
+  key1 key2     data1     data2
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+df
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+1    a  two -0.422603  0.389802
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+4    a  one -0.132952  0.228349
+for (k1,k2),group in df.groupby(['key1','key2']):
+    print((k1,k2))
+    print(group)
+    
+('a', 'one')
+  key1 key2     data1     data2
+0    a  one -1.499408  0.924550
+4    a  one -0.132952  0.228349
+('a', 'two')
+  key1 key2     data1     data2
+1    a  two -0.422603  0.389802
+('b', 'one')
+  key1 key2     data1     data2
+2    b  one  0.561044  0.677797
+('b', 'two')
+  key1 key2     data1    data2
+3    b  two -0.811542 -1.04491
+pieces = dict (list(df.group('key')))
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 5067, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'group'
+pieces = dict (list(df.groupby('key')))
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\generic.py", line 7632, in groupby
+    observed=observed, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 2110, in groupby
+    return klass(obj, by, **kwds)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\groupby.py", line 360, in __init__
+    mutated=self.mutated)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\groupby\grouper.py", line 578, in _get_grouper
+    raise KeyError(gpr)
+KeyError: 'key'
+pieces = dict (list(df.groupby('key1')))
+pieces['b']
+  key1 key2     data1     data2
+2    b  one  0.561044  0.677797
+3    b  two -0.811542 -1.044910
+grouped = df.groupby(df.dtypes,axis=1)
+grouped
+<pandas.core.groupby.generic.DataFrameGroupBy object at 0x000000000BE0AEF0>
+for dtype,group in grouped:
+    print(dtype)
+    print(group)
+    
+float64
+      data1     data2
+0 -1.499408  0.924550
+1 -0.422603  0.389802
+2  0.561044  0.677797
+3 -0.811542 -1.044910
+4 -0.132952  0.228349
+object
+  key1 key2
+0    a  one
+1    a  two
+2    b  one
+3    b  two
+4    a  one
